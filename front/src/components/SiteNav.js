@@ -2,8 +2,10 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 
 import OnLogin from './OnLogin';
 import OffLogin from './OffLogin';
+import { useNavigate } from 'react-router-dom';
 
-export default function SiteNav({ navigate }) {
+export default function SiteNav() {
+  const navigate = useNavigate();
   const isLogin = 1;
   const userInfo = {};
 
@@ -11,7 +13,7 @@ export default function SiteNav({ navigate }) {
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
         <Navbar.Brand href="/">
-          <span className="logoTitle">Fruity</span>
+          <span className="logoTitle">CockTail</span>
         </Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link onClick={() => navigate('/')}>Home</Nav.Link>
@@ -21,7 +23,7 @@ export default function SiteNav({ navigate }) {
         {isLogin === 0 ? (
           <OnLogin user={userInfo} navigate={navigate} />
         ) : (
-          <OffLogin />
+          <OffLogin navigate={navigate} />
         )}
       </Container>
     </Navbar>
