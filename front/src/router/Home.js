@@ -1,5 +1,6 @@
 import CockTail from '../components/CockTail';
 import MainCarousel from '../components/MainCarousel';
+
 export default function Home() {
   const data = [
     {
@@ -17,7 +18,7 @@ export default function Home() {
     <>
       <MainCarousel />
       <div className="container" style={{ paddingTop: 20 }}>
-        <div>
+        <div className="row">
           <CockTail data={data} />
         </div>
       </div>

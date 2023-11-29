@@ -1,12 +1,11 @@
 import { Navbar, Container, Nav } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 import OnLogin from './OnLogin';
 import OffLogin from './OffLogin';
-import { useNavigate } from 'react-router-dom';
 
-export default function SiteNav() {
+export default function SiteNav({ isLogin }) {
   const navigate = useNavigate();
-  const isLogin = 1;
   const userInfo = {};
 
   return (
@@ -21,9 +20,9 @@ export default function SiteNav() {
           <Nav.Link onClick={() => navigate('/cart')}>Cart</Nav.Link>
         </Nav>
         {isLogin === 0 ? (
-          <OnLogin user={userInfo} navigate={navigate} />
-        ) : (
           <OffLogin navigate={navigate} />
+        ) : (
+          <OnLogin user={userInfo} navigate={navigate} />
         )}
       </Container>
     </Navbar>
