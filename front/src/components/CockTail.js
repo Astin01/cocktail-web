@@ -15,8 +15,10 @@ export default function CockTail({ data }) {
           paddingTop="20px"
           alt="img"
         />
-        <h4>{data.title}</h4>
-        <p>{data.price}원</p>
+        <div>
+          <h4>{data.title}</h4>
+          <div>{data.price}원</div>
+        </div>
       </div>
     );
   });
