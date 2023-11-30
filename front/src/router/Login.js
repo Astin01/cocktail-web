@@ -1,7 +1,7 @@
 import { Button, Container, Form, Row } from 'react-bootstrap';
 
 import onLogin from '../utils/onLogin';
-import ckLogin from '../utils/ckLogin';
+import checkLogin from '../utils/checkLogin';
 
 export default function Login({ setIsLogin }) {
   return (
@@ -30,7 +30,7 @@ export default function Login({ setIsLogin }) {
             type="submit"
             onClick={() => {
               setInterval(() => {
-                ckLogin(setIsLogin);
+                checkLogin(setIsLogin);
               }, 1000);
             }}
           >

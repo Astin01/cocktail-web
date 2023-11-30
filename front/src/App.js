@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import SiteNav from './components/SiteNav';
 
@@ -11,14 +11,12 @@ function App() {
   const [isLogin, setIsLogin] = useState(0);
   return (
     <>
-      <BrowserRouter>
-        <SiteNav isLogin={isLogin} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
-          <Route path="/signin" element={<SignIn />} />
-        </Routes>
-      </BrowserRouter>
+      <SiteNav isLogin={isLogin} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
     </>
   );
 }
