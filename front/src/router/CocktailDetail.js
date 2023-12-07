@@ -76,16 +76,6 @@ export default function CockTailDetail(props) {
             버튼1
           </Nav.Link>
         </Nav.Item>
-        <Nav.Item>
-          <Nav.Link
-            onClick={() => {
-              setTab(2);
-            }}
-            eventKey="link2"
-          >
-            버튼2
-          </Nav.Link>
-        </Nav.Item>
       </Nav>
       <TabContent tab={tab} />
     </div>
@@ -104,7 +94,7 @@ function TabContent({ tab }) {
 
   return (
     <div className={'start ' + fade}>
-      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
+      {[<div>정보</div>, <div>후기</div>][tab]}
     </div>
   );
 }

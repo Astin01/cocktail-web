@@ -14,7 +14,7 @@ export default function SignIn() {
         </Row>
         <Row>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>주소</Form.Label>
+            <Form.Label>닉네임</Form.Label>
             <Form.Control type="text" />
           </Form.Group>
         </Row>

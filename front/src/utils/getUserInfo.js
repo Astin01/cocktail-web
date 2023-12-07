@@ -8,3 +8,5 @@ export const getUserInfo = createAsyncThunk('userdata', async () => {
     console.error(error);
   }
 });
+
+export default getUserInfo;
