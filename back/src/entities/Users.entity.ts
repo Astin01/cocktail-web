@@ -4,7 +4,6 @@ import {
   DeleteDateColumn,
   Entity,
   PrimaryColumn,
-  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
@@ -19,7 +18,7 @@ export class Users {
   @Column('varchar', { name: 'email', unique: true, length: 30 })
   email: string;
 
-  @Column('varchar', { name: 'nickname', length: 30 })
+  @Column('varchar', { name: 'nickname', unique: true, length: 30 })
   nickname: string;
 
   @Column('varchar', { name: 'address', length: 30 })
@@ -27,6 +26,9 @@ export class Users {
 
   @Column('varchar', { name: 'telephone', length: 30 })
   telephone: string;
+
+  // @OneToMany(() => Reviews, (review) => review.id)
+  // UserReviews: string[];
 
   @CreateDateColumn()
   createdAt: Date;

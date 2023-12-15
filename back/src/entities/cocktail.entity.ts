@@ -5,15 +5,15 @@ export class Cocktail {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column('varchar', { name: 'name', length: 15 })
   name: string;
 
-  @Column()
+  @Column('varchar', { name: 'ingredient', length: 50 })
   ingredients: string[];
 
-  @Column()
+  @Column('varchar', { name: 'description', length: 300 })
   description: string;
 
-  @Column()
-  imageUrl: string;
+  @Column('varchar', { name: 'address', length: 100 })
+  address: string;
 }
