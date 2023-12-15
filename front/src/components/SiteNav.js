@@ -1,12 +1,8 @@
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-import OnLogin from './OnLogin';
-import OffLogin from './OffLogin';
-
 export default function SiteNav({ isLogin }) {
   const navigate = useNavigate();
-  const userInfo = {};
 
   return (
     <Navbar bg="dark" data-bs-theme="dark">
@@ -19,11 +15,14 @@ export default function SiteNav({ isLogin }) {
           <Nav.Link onClick={() => navigate('/event')}>Event</Nav.Link>
           <Nav.Link onClick={() => navigate('/cart')}>Cart</Nav.Link>
         </Nav>
-        {isLogin === 0 ? (
+        <Nav className="ms-auto">
+          <Nav.Link onClick={() => navigate('/checkout')}>주문하기</Nav.Link>
+        </Nav>
+        {/* {isLogin === 0 ? (
           <OffLogin navigate={navigate} />
         ) : (
           <OnLogin user={userInfo} navigate={navigate} />
-        )}
+        )} */}
       </Container>
     </Navbar>
   );

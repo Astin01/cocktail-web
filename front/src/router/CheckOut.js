@@ -1,73 +1,31 @@
 import { Table, Form, Row, Container, InputGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import styles from '../css/payment.module.css';
+import styles from '../css/CheckOut.module.css';
 import React, { useState, useEffect } from 'react';
+import { nanoid } from 'nanoid';
+import { useQuery } from '@tanstack/react-query';
 
-import { loadTossPayments } from '@tosspayments/payment-sdk';
+import { loadPaymentWidget, ANONYMOUS } from '@tosspayments/payment-widget-sdk';
+import { useNavigate } from 'react-router-dom';
 
 export default function CheckOut() {
-  let [pay, setPay] = useState(0);
+  let price = 0;
+  let navigate = useNavigate();
+
   let item = useSelector((state) => {
     return state.cartItem;
   });
   let user = useSelector((state) => {
     return state.user;
   });
-  let price = 0;
+
   item.map((item) => (price += item.tprice));
-  useEffect(() => {
-    const clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq';
-    if (pay === 1) {
-      loadTossPayments(clientKey).then((tossPayments) => {
-        tossPayments
-          .requestPayment('카드', {
-            amount: price,
-            orderId: 'TUfXTCWu5eIkW2mLrFxxH',
-            orderName: item[0].name + '외' + item.length + '건',
-            customerName: user.name,
-            successUrl: 'http://localhost:3000/',
-            failUrl: 'http://localhost:3000/checkout',
-          })
-          .catch(function (error) {
-            if (error.code === 'USER_CANCEL') {
-              alert('취소되었습니다');
-            } else if (error.code === 'INVALID_CARD_COMPANY') {
-              alert('유효하지 않은 카드입니다');
-            }
-          });
-      });
-    }
-    if (pay === 2) {
-      loadTossPayments(clientKey).then((tossPayments) => {
-        tossPayments
-          .requestPayment('가상계좌', {
-            // 결제 수단 파라미터
-            // 결제 정보 파라미터
-            amount: price,
-            orderId: 'TUfXTCWu5eIkW2mLrFxxH',
-            orderName: item[0].name + '외' + item.length + '건',
-            customerName: user.name,
-            successUrl: 'http://localhost:3000/',
-            failUrl: 'http://localhost:3000/checkout',
-            validHours: 24,
-            cashReceipt: {
-              type: '소득공제',
-            },
-          })
-          .catch(function (error) {
-            if (error.code === 'USER_CANCEL') {
-              alert('취소되었습니다');
-            } else if (error.code === 'INVALID_CARD_COMPANY') {
-              alert('유효하지 않은 요청입니다');
-            }
-          });
-      });
-    }
-  }, [pay]);
+
   return (
     <>
       <Container className={styles.container}>
-        <Row>
+        <div id="payment-widget" />
+        {/* <Row>
           <Table className={styles.table}>
             <tr>
               <th>구매자 정보</th>
@@ -112,7 +70,7 @@ export default function CheckOut() {
               </td>
             </tr>
           </Table>
-        </Row>
+        </Row> */}
         <Row>
           <Table className={styles.table}>
             <tr>
@@ -143,13 +101,13 @@ export default function CheckOut() {
               <td>할인</td>
               <td>0</td>
             </tr>
-            <tr>
+            {/* <tr>
               <td>배송비</td>
               <td>2500</td>
-            </tr>
+            </tr> */}
             <tr>
               <td>총결제금액</td>
-              <td>{price + 2500}</td>
+              <td>{price}</td>
             </tr>
             <tr>
               <td>결제방법</td>
@@ -165,9 +123,7 @@ export default function CheckOut() {
         </Row>
         <button
           onClick={() => {
-            let e = document.getElementById('payList');
-            let value = e.options[e.selectedIndex].value;
-            setPay(parseInt(value));
+            navigate('/success');
           }}
         >
           결제하기

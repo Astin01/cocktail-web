@@ -1,29 +1,28 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { inCart } from '../store';
+import { inCart } from '../store/store';
+import { data } from '../store/data';
 
-export default function CockTailDetail(props) {
+export default function CockTailDetail() {
   let [input, setInput] = useState('');
   let [tab, setTab] = useState(0);
   let dispatch = useDispatch();
   let navigate = useNavigate();
-  const product = {};
+  let params = useParams();
+
+  const product = data[params.id - 1];
 
   return (
     <div className="container">
       <div className="row" style={{ paddingTop: 10 }}>
         <div className="col-md-6">
-          <img
-            src={`../img/fruit/${product.title}.jpg`}
-            width="100%"
-            alt="product"
-          />
+          <img src={product?.address} width="100%" alt="product" />
         </div>
         <div className="col-md-6">
-          <h4 className="pt-5">{product.title}</h4>
-          <p>{product.content}</p>
+          <h4 className="pt-5">{product.name}</h4>
+          <p>{product.description}</p>
           <p>{product.price}원</p>
           <input
             type="number"
@@ -41,7 +40,7 @@ export default function CockTailDetail(props) {
               dispatch(
                 inCart({
                   id: product.id,
-                  name: product.title,
+                  name: product.name,
                   count: parseInt(input),
                   price: product.price,
                   tprice: product.price * input,
@@ -59,21 +58,11 @@ export default function CockTailDetail(props) {
         <Nav.Item>
           <Nav.Link
             onClick={() => {
-              setTab(0);
-            }}
-            eventKey="link0"
-          >
-            버튼0
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link
-            onClick={() => {
               setTab(1);
             }}
             eventKey="link1"
           >
-            버튼1
+            후기
           </Nav.Link>
         </Nav.Item>
       </Nav>
@@ -93,8 +82,6 @@ function TabContent({ tab }) {
   }, [tab]);
 
   return (
-    <div className={'start ' + fade}>
-      {[<div>정보</div>, <div>후기</div>][tab]}
-    </div>
+    <div className={'start ' + fade}>{[<div></div>, <div></div>][tab]}</div>
   );
 }

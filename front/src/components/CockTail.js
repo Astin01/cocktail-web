@@ -6,17 +6,17 @@ export default function CockTail({ data }) {
     return (
       <div
         className="col-md-4"
-        onClick={() => navigate(`/detail/${data.title}`)}
+        onClick={() => navigate(`/cocktail/${data.id}`)}
       >
         <img
-          src={data.src}
+          src={data.address}
           width="265px"
           height="200px"
           paddingTop="20px"
           alt="img"
         />
         <div>
-          <h4>{data.title}</h4>
+          <h4>{data.name}</h4>
           <div>{data.price}원</div>
         </div>
       </div>
